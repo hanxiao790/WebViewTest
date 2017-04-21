@@ -9,7 +9,8 @@
 #import "WebViewController.h"
 #import <WebViewJavascriptBridge.h>
 
-@interface WebViewController () <WKUIDelegate, WKNavigationDelegate>
+
+@interface WebViewController () <WKNavigationDelegate>
 
 @property (nonatomic) WebViewJavascriptBridge *bridge;
 @property (nonatomic) WKWebView *webView;
@@ -29,31 +30,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.view addSubview:self.webView];
+
     [SVProgressHUD show];
     
-    if (_bridge) {
-        return;
-    }
-    [WebViewJavascriptBridge enableLogging];
-    _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView];
+//    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
+//    [_bridge setWebViewDelegate:self];
+    _webView.navigationDelegate = self;
+    [self.view addSubview:_webView];
     
+//    [_bridge registerHandler:@"ObjC Echo" handler:^(id data, WVJBResponseCallback responseCallback) {
+//        NSLog(@"ObjC Echo called with: %@", data);
+//        responseCallback(data);
+//    }];
+//    
+//    [_bridge callHandler:@"JS Echo" data:nil responseCallback:^(id responseData) {
+//        NSLog(@"ObjC received response: %@", responseData);
+//    }];
 }
 
 
 #pragma mark - WKNavigationDelegate
 
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
-    [SVProgressHUD dismiss];
-    
-}
-
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    [SVProgressHUD dismiss];
-}
-
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     [SVProgressHUD dismiss];
 }
 
@@ -74,7 +72,6 @@
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:webConfig];
         _webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
         
-        _webView.navigationDelegate = self;
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_url]];
         [_webView loadRequest:request];
     }
