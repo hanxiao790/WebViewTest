@@ -1,0 +1,15 @@
+PODS:
+  - SVProgressHUD (2.1.2)
+  - WebViewJavascriptBridge (6.0.2)
+
+DEPENDENCIES:
+  - SVProgressHUD
+  - WebViewJavascriptBridge
+
+SPEC CHECKSUMS:
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  WebViewJavascriptBridge: 791ee0e26d1bf15efe5fb7fb9666a71a19b89d77
+
+PODFILE CHECKSUM: b29ed79c90da3961818a9d254527e7c334f15d30
+
+COCOAPODS: 1.2.1
