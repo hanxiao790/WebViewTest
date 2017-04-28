@@ -14,6 +14,7 @@
 
 @property (nonatomic) WebViewJavascriptBridge *bridge;
 @property (nonatomic) WKWebView *webView;
+@property (nonatomic) UILabel *testLabel;
 
 @end
 
@@ -30,13 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [SVProgressHUD show];
     
 //    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
 //    [_bridge setWebViewDelegate:self];
+    self.webView.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 20);
+    [self.view addSubview:self.webView];
     _webView.navigationDelegate = self;
-    [self.view addSubview:_webView];
     
 //    [_bridge registerHandler:@"ObjC Echo" handler:^(id data, WVJBResponseCallback responseCallback) {
 //        NSLog(@"ObjC Echo called with: %@", data);
@@ -76,6 +78,14 @@
         [_webView loadRequest:request];
     }
     return _webView;
+}
+
+- (UILabel *)testLabel {
+    if (!_testLabel) {
+        _testLabel = [[UILabel alloc] init];
+        _testLabel.text = @"TEST MESSAGE";
+    }
+    return _testLabel;
 }
 
 /*

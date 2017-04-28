@@ -12,4 +12,6 @@
 
 @interface RootViewController : UIViewController
 
+@property (nonatomic) NSString *testString;
+
 @end
