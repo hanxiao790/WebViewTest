@@ -36,6 +36,7 @@
     NSString *test = @"ww";
     NSString *test2 = @"2";
     NSString *test3 = @"3";
+    NSString *test4 = @"4";
     self.webView.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 20);
     [self.view addSubview:self.webView];
     _webView.navigationDelegate = self;
